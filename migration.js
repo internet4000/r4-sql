@@ -45,7 +45,7 @@ db.parallelize(function() {
 	for (let [id, data] of Object.entries(jsonDb.channels)) {
 		// console.log(id, data)
 		if (!dryRun) statement.run(id, data.created, data.title, data.body, data.slug, data.image)
-		// @todo channelPublic, created, updated, coordinatesLatitude, coordinateLongitude, favoriteChannels, image, slug, isFeatured, isPremium, tracks, followers (merged from channelPublic)
+		// @todo updated, coordinatesLatitude, coordinateLongitude, favoriteChannels, isFeatured, isPremium, tracks, followers (merged from channelPublic)
 	}
 	statement.finalize()
 
