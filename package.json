@@ -5,8 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node .",
-    "dev": "npx nodemon .",
-    "db": "sqlite3 r4.db"
+    "dev": "npx nodemon ."
   },
   "dependencies": {
     "fastify": "^3.0.0-rc.2",

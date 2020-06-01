@@ -1,21 +1,21 @@
 /*
  Running this file with node takes the local radio4000-export.json database,
- and migrates it to a r4.db sqlite3 database. See db.js.
+ and migrates it to a sqlite3 database. 
 
-	If it fails, run this inside `sqlite3 r4.db`: `.read seed.sql` to reset the db.
+	If it fails, run this inside `sqlite3 r4.sqlite`: `.read schema.sql` to reset the db.
 */
 
 const fs = require('fs')
+const sqlite3 = require('sqlite3')
 const db = require('./db.js')
+const jsonDb = JSON.parse(fs.readFileSync('r4.json'))
 
 // Enable this to run the script without modifying the database.
 let dryRun = false
 
-// Load our local JSON database. This is what we want to migrate.
-const jsonDb = JSON.parse(fs.readFileSync('radio4000-export.json'))
+// Log what's happening to the console.
 const count = (key) => Object.keys(jsonDb[key]).length
-
-console.log('Migrating JSON database to r4.db.')
+console.log('Migrating JSON database to r4.sqlite.')
 console.log('Make some coffee with an amigo. It will take at least 5 mins...')
 console.log({users: count('users'), channels: count('channels'), tracks: count('tracks')})
 

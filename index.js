@@ -1,7 +1,8 @@
-const db = require('./db')
+const sqlite3 = require('sqlite3')
+const db = require('./db.js')
 
 const fastify = require('fastify')({
-	// logger: true
+	logger: true
 })
 
 fastify.get('/', async (request, reply) => {
