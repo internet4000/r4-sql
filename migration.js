@@ -41,11 +41,11 @@ db.parallelize(function() {
 	}
 
 	// 3. Insert channels
-	var statement = db.prepare("INSERT INTO channels (id, title) VALUES (?, ?)")
+	var statement = db.prepare("INSERT INTO channels (id, createdAt, title, body, slug, image) VALUES (?, ?, ?, ?, ?, ?)")
 	for (let [id, data] of Object.entries(jsonDb.channels)) {
 		// console.log(id, data)
-		if (!dryRun) statement.run(id, data.title)
-		// @todo body, channelPublic, created, updated, coordinatesLatitude, coordinateLongitude, favoriteChannels, image, slug, isFeatured, isPremium, tracks, followers (merged from channelPublic)
+		if (!dryRun) statement.run(id, data.created, data.title, data.body, data.slug, data.image)
+		// @todo channelPublic, created, updated, coordinatesLatitude, coordinateLongitude, favoriteChannels, image, slug, isFeatured, isPremium, tracks, followers (merged from channelPublic)
 	}
 	statement.finalize()
 
@@ -57,14 +57,14 @@ db.parallelize(function() {
 	}
 
 	// 4. Insert tracks
-	var statement = db.prepare("INSERT INTO tracks (id, title, url, body, createdAt, channel_id) VALUES (?, ?, ?, ?, ?, ?)")
-	for (let [id, data] of Object.entries(jsonDb.tracks)) {
-		if (!data.channel) continue
-		// console.log(id, data)
-		if (!dryRun) statement.run(id, data.title, data.url, data.body, data.created, data.channel)
-		log()
-	}
-	statement.finalize()
+	// var statement = db.prepare("INSERT INTO tracks (id, title, url, body, createdAt, channel_id) VALUES (?, ?, ?, ?, ?, ?)")
+	// for (let [id, data] of Object.entries(jsonDb.tracks)) {
+	// 	if (!data.channel) continue
+	// 	// console.log(id, data)
+	// 	if (!dryRun) statement.run(id, data.title, data.url, data.body, data.created, data.channel)
+	// 	log()
+	// }
+	// statement.finalize()
 })
 
 db.close()

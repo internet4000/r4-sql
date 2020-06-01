@@ -10,7 +10,7 @@ fastify.get('/', async (request, reply) => {
 })
 
 fastify.get('/users', (request, reply) => {
-	db.all('SELECT rowid AS id, email FROM users', (err, data) => {
+	db.all('SELECT id, email, channel_id FROM users', (err, data) => {
 		if (err) return {error: err}
 		reply.send({data})
 	})
@@ -18,17 +18,17 @@ fastify.get('/users', (request, reply) => {
 
 fastify.get('/users/:id', (request, reply) => {
 	const {id} = request.params
-	db.get(
-		`SELECT rowid AS id, email FROM users WHERE rowid = ${id}`,
-		(err, data) => {
-			if (err) return {error: err}
-			reply.send({data})
-		}
-	)
+	// console.log(request.params)
+	// reply.send({id})
+	db.get(`SELECT * FROM users WHERE id = "${id}"`, (err, data) => {
+		if (err) return {error: err}
+		console.log(data)
+		reply.send({data})
+	})
 })
 
 fastify.get('/channels', (request, reply) => {
-	db.all('SELECT *, rowid AS id FROM channels', (err, data) => {
+	db.all('SELECT * FROM channels', (err, data) => {
 		if (err) reply.send({error: err})
 		reply.send({data})
 	})
@@ -36,13 +36,10 @@ fastify.get('/channels', (request, reply) => {
 
 fastify.get('/channels/:id', (request, reply) => {
 	const {id} = request.params
-	db.get(
-		`SELECT rowid AS id, * FROM channels WHERE rowid = ${id}`,
-		(err, data) => {
-			if (err) return {error: err}
-			reply.send({data})
-		}
-	)
+	db.get(`SELECT * FROM channels WHERE id = "${id}"`, (err, data) => {
+		if (err) return {error: err}
+		reply.send({data})
+	})
 })
 
 const start = async () => {
