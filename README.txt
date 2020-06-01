@@ -5,6 +5,7 @@ THE DATABASE
 
 - `r4.db` is a sqlite3 database
 - `seed.sql` contains the SQL statements to create the database tables and seed them with test data
+- `radio4000-export.json` is a full snapshot of our Firebase database for testing
 
 To populate the database, do:
 
@@ -34,3 +35,9 @@ It supports the following endpoints:
 - GET /users/:id
 - GET /channels
 - GET /channels/:id
+
+
+TIPS FOR USING JQ
+
+To find tracks by channel, do
+	jq '.tracks | to_entries | .[] | select(.value.channel == "-JXHtCxC9Ew-Ilck6iZ8")' radio4000-export.json
