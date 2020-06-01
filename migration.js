@@ -57,14 +57,14 @@ db.parallelize(function() {
 	}
 
 	// 4. Insert tracks
-	// var statement = db.prepare("INSERT INTO tracks (id, title, url, body, createdAt, channel_id) VALUES (?, ?, ?, ?, ?, ?)")
-	// for (let [id, data] of Object.entries(jsonDb.tracks)) {
-	// 	if (!data.channel) continue
-	// 	// console.log(id, data)
-	// 	if (!dryRun) statement.run(id, data.title, data.url, data.body, data.created, data.channel)
-	// 	log()
-	// }
-	// statement.finalize()
+	var statement = db.prepare("INSERT INTO tracks (id, title, url, body, createdAt, channel_id) VALUES (?, ?, ?, ?, ?, ?)")
+	for (let [id, data] of Object.entries(jsonDb.tracks)) {
+		if (!data.channel) continue
+		// console.log(id, data)
+		if (!dryRun) statement.run(id, data.title, data.url, data.body, data.created, data.channel)
+		log()
+	}
+	statement.finalize()
 })
 
 db.close()
