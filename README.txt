@@ -41,7 +41,7 @@ It supports the following endpoints:
 TIPS 
 
 Find tracks by channel with jq, do:
-	jq '.tracks | to_entries | .[] | select(.value.channel == "-JXHtCxC9Ew-Ilck6iZ8")' radio4000-export.json
+	jq '.tracks | to_entries | .[] | select(.value.channel == "-JXHtCxC9Ew-Ilck6iZ8")' r4.json
 
 To export results of SQL queries as .csv, do:
 	sqlite3 r4.sqlite
@@ -49,5 +49,5 @@ To export results of SQL queries as .csv, do:
 	sqlite> .mode csv
 	sqlite> .once db.csv
 	sqlite> SELECT * FROM channels;
-	cat db.csv
+	cat r4.csv
 
