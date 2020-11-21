@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node .",
-    "dev": "npx nodemon ."
+    "dev": "npx nodemon .",
+    "export-live-db": "firebase database:get / --project firebase-radio4000 --output ./r4.json"
   },
   "dependencies": {
     "fastify": "^3.8.0",

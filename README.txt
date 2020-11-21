@@ -6,19 +6,21 @@ This repo contains a database, a migration from firebase to sql, and a node API 
 
 THE DATABASE
 
-- r4.json is a full snapshot of our Firebase database for testing
-- r4.sqlite is a sqlite3 database
-- schema.sql creates the database tables
+- r4.json is a full snapshot of our Firebase database for testing (pull a fresh copy with `run-script export-live-db`)
+- r4.sqlite is the sqlite3 database
+- schema.sql defines the database tables
 
-To run the schema, do:
+To run the schema on the database, do:
 
 1. sqlite3 r4.sqlite
 2. sqlite> .read schema.sql
 
+Use https://sqlitebrowser.org/ to inspect the database cross-platform.
+
 
 THE MIGRATION
 
-migration.js runs through the Firebase json db and inserts it into the sqlite database.
+migration.js runs through the Firebase json db in r4.json and inserts it into the r4.sqlite.
 Note that is takes a long time with all the tracks.
 
 node migration.js
