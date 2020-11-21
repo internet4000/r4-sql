@@ -42,6 +42,21 @@ fastify.get('/channels/:id', (request, reply) => {
 	})
 })
 
+fastify.get('/tracks', (request, reply) => {
+	db.all('SELECT * FROM tracks LIMIT 5', (err, data) => {
+		if (err) reply.send({error: err})
+		reply.send({data})
+	})
+})
+
+fastify.get('/tracks/:id', (request, reply) => {
+	const {id} = request.params
+	db.get(`SELECT * FROM tracks WHERE id = "${id}"`, (err, data) => {
+		if (err) return {error: err}
+		reply.send({data})
+	})
+})
+
 const start = async () => {
 	try {
 		await fastify.listen(3000)
